@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     startButton.addEventListener('click', () => {
         landingPage.style.display = 'none';
-        levelContainer.style.display = 'block';
+        levelContainer.classList.remove('hidden');
         // Add code to initialize and display the first level
     });
 });
