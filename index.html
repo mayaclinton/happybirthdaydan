@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dan’s Mystical Global Journey</title>
+    <title>Dan’s Mystical Global Journey - Connections Game</title>
     <link href="https://unpkg.com/tailwindcss@^2.0/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
     <style>
@@ -12,12 +12,35 @@
             background-color: #1b1b1b;
             color: #f5f5f5;
         }
-        #start-button {
-            transition: transform 0.3s;
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
         }
-        #start-button:hover {
-            transform: scale(1.05);
+        .grid-item {
+            padding: 20px;
+            background-color: #2a2a2a;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
         }
+        .grid-item:hover {
+            background-color: #4a4a4a;
+        }
+        .selected {
+            background-color: #4a3b92;
+        }
+        .grouped {
+            background-color: #5f4bb6;
+            cursor: not-allowed;
+        }
+        /* If using plain CSS, add these styles */
+.bg-blue-500 { background-color: #3b82f6; }
+.bg-green-500 { background-color: #10b981; }
+.bg-red-500 { background-color: #ef4444; }
+.bg-yellow-500 { background-color: #f59e0b; }
+
     </style>
 </head>
 <body>
@@ -28,18 +51,12 @@
             <button id="start-button" class="px-8 py-4 bg-purple-700 text-white text-xl rounded-lg shadow-lg">Begin Your Journey</button>
         </div>
         <div id="level-container" class="hidden p-8 bg-gray-800 rounded-lg shadow-lg">
-            <div class="level active">
-                <h2 class="text-2xl lg:text-4xl mb-4">North America</h2>
-                <p class="text-lg lg:text-2xl mb-4">Guardians of the longest coastline hold ancient whispers. Where am I?</p>
-                <div id="activity" class="mb-6">
-                    <!-- Insert activity content here -->
-                </div>
-                <button id="next-button" class="px-6 py-3 bg-blue-600 text-white text-lg rounded-lg shadow-lg">Next Level</button>
+            <h2 class="text-2xl lg:text-4xl mb-4">Connections Game</h2>
+            <div id="grid" class="grid mb-6">
+                <!-- Grid items will be dynamically inserted here -->
             </div>
-
-            
+            <button id="next-button" class="hidden px-6 py-3 bg-blue-600 text-white text-lg rounded-lg shadow-lg">Next Level</button>
         </div>
-        
     </div>
     <script src="script.js"></script>
 </body>
