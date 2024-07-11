@@ -64,29 +64,29 @@ document.addEventListener('DOMContentLoaded', (event) => {
     let groupedItems = 0;
     let currentGroupIndex = 0;
 
-    // const countdownTargetDate = new Date('July 24, 2024 00:00:00').getTime();
+    const countdownTargetDate = new Date('July 24, 2024 00:00:00').getTime();
 
-    // function updateCountdown() {
-    //     const now = new Date().getTime();
-    //     const distance = countdownTargetDate - now;
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = countdownTargetDate - now;
 
-    //     if (distance <= 0) {
-    //         startButton.textContent = 'Begin Your Journey';
-    //         startButton.disabled = false;
-    //         clearInterval(countdownInterval);
-    //     } else {
-    //         const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    //         const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    //         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    //         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        if (distance <= 0) {
+            startButton.textContent = 'Begin Your Journey';
+            startButton.disabled = false;
+            clearInterval(countdownInterval);
+        } else {
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    //         startButton.textContent = `Unlocks in ${days}d ${hours}h ${minutes}m ${seconds}s`;
-    //         startButton.disabled = true;
-    //     }
-    // }
+            startButton.textContent = `Unlocks in ${days}d ${hours}h ${minutes}m ${seconds}s`;
+            startButton.disabled = true;
+        }
+    }
 
-    // const countdownInterval = setInterval(updateCountdown, 1000);
-    // updateCountdown(); // Initial call to set the countdown immediately
+    const countdownInterval = setInterval(updateCountdown, 1000);
+    updateCountdown(); // Initial call to set the countdown immediately
 
     startButton.addEventListener('click', () => {
         landingPage.style.display = 'none';
