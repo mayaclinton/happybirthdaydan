@@ -3,7 +3,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const landingPage = document.getElementById('landing-page');
     const levelContainer = document.getElementById('level-container');
     const gridContainer = document.getElementById('grid');
-    const nextButton = document.getElementById('next-button');
+    const nextButton1 = document.getElementById('next-button-1');
+    const nextButton2 = document.getElementById('next-button-2');
+    const hintButtonWordplay = document.getElementById('hint-button-wordplay');
+    const hintWordplay = document.getElementById('hint-wordplay');
+    const hintButtonDefinition = document.getElementById('hint-button-definition');
+    const hintDefinition = document.getElementById('hint-definition');
+    const crosswordCells = document.querySelectorAll('.crossword-cell');
 
     const items = [
         { name: 'Canada', group: 1 },
@@ -24,7 +30,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         { name: 'Colosseum', group: 4 }
     ];
 
-    const groupColors = ['bg-blue-500', 'bg-green-500', 'bg-red-500', 'bg-yellow-500'];
+    const groupColors = ['bg-blue-500', 'bg-green-500', 'bg-purple-500', 'bg-yellow-500'];
 
     let selectedItems = [];
     let groupedItems = 0;
@@ -74,7 +80,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 groupedItems += 4;
                 currentGroupIndex++;
                 if (groupedItems === items.length) {
-                    nextButton.classList.remove('hidden');
+                    nextButton1.classList.remove('hidden');
                     alert('Congratulations! You have found all groups.');
                 } else {
                     alert('Correct! You found a group.');
@@ -86,6 +92,31 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 });
             }
             selectedItems = [];
+        }
+    }
+
+    nextButton1.addEventListener('click', () => {
+        document.getElementById('level-1').classList.add('hidden');
+        document.getElementById('level-2').classList.remove('hidden');
+    });
+
+    hintButtonWordplay.addEventListener('click', () => {
+        hintWordplay.style.display = 'block';
+    });
+
+    hintButtonDefinition.addEventListener('click', () => {
+        hintDefinition.style.display = 'block';
+    });
+
+    crosswordCells.forEach(cell => {
+        cell.addEventListener('input', checkCrossword);
+    });
+
+    function checkCrossword() {
+        const answer = Array.from(crosswordCells).map(cell => cell.value.toUpperCase()).join('');
+        if (answer === 'EMU') {
+            alert('Correct! The answer is EMU.');
+            nextButton2.classList.remove('hidden');
         }
     }
 });
