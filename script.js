@@ -66,18 +66,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     const countdownTargetDate = new Date('July 24, 2024 00:00:00').getTime();
 
-    async function fetchServerTime() {
-        const response = await fetch('http://worldtimeapi.org/api/timezone/Etc/UTC');
-        const data = await response.json();
-        return new Date(data.utc_datetime).getTime();
-    }
-
-    async function updateCountdown() {
-        const now = await fetchServerTime();
+    function updateCountdown() {
+        const now = new Date().getTime();
         const distance = countdownTargetDate - now;
 
         if (distance <= 0) {
-            startButton.textContent = 'Begin Your Journey';
+            startButton.textContent = 'Start the Game';
             startButton.disabled = false;
             clearInterval(countdownInterval);
         } else {
@@ -99,7 +93,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         levelContainer.classList.remove('hidden');
         loadGrid();
     });
-
 
 
     function loadGrid() {
