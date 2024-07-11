@@ -22,7 +22,6 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: linear-gradient(45deg, #ff7e5f, #feb47b);
             background-size: 400% 400%;
             animation: gradientAnimation 15s ease infinite;
         }
@@ -75,7 +74,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #665d8e;
+            background-color: #2f0fbd;
             color: #f5f5f5;
             font-size: 24px;
             border-radius: 5px;
@@ -110,58 +109,93 @@
             font-size: 1.2em;
             color: #ffd700;
         }
+        .crossword-cell {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #6a2099a2;
+            color: #f5f5f5;
+            font-size: 24px;
+            border-radius: 5px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+        #street-view {
+        width: 100%;
+        height: 400px;
+    }
+    /* Hide the Street View location info */
+    .gm-style .gm-iv-address {
+        display: none !important;
+    }
+    .gm-style .gm-iv-address-background {
+        display: none !important;
+    }
+    #countdown {
+            font-size: 3rem;
+            text-align: center;
+            margin-top: 20%;
+        }
     </style>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPzLPPI72waDqKFoe0pkwJYbCJDuv9Kbg&libraries=geometry"></script>
 </head>
 <body>
+    
     <div id="game-container" class="max-w-4xl mx-auto p-8">
-        <div id="landing-page" class="flex flex-col justify-center items-center h-screen text-center bg-cover bg-center">
+        <div id="landing-page" class="landing-page flex flex-col justify-center items-center h-screen text-center">
             <h1 class="text-4xl lg:text-6xl text-yellow-400 drop-shadow-lg mb-4">Dan’s Birthday Quiz</h1>
+        
             <img src="cake.gif" width="300">
-            <button id="start-button" class="px-8 py-4 bg-purple-700 text-white text-xl rounded-lg shadow-lg">Begin The Game</button>
+            <button id="start-button" class="px-8 py-4 bg-purple-700 text-white text-xl rounded-lg shadow-lg transition-transform transform hover:scale-105">Start The Game</button>
         </div>
         <div id="level-container" class="hidden p-8 bg-gray-800 rounded-lg shadow-lg">
-            <div id="level-1">
-            <h2 class="text-2xl lg:text-4xl mb-4">Connections Game</h2>
-            <div id="grid" class="grid mb-6">
-                <!-- Grid items will be dynamically inserted here -->
+            <div id="level-1" class="level">
+                <h2 class="text-2xl lg:text-4xl mb-4">Connections Game</h2>
+                <div id="grid" class="grid grid-cols-4 gap-4 mb-6">
+                    <!-- Grid items will be dynamically inserted here -->
+                </div>
+                <div id="congratulations-1" class="congratulations text-center">Congratulations! You completed Level 1.</div>
+                <button id="next-button-1" class="hidden px-6 py-3 bg-blue-600 text-white text-lg rounded-lg shadow-lg transition-transform transform hover:scale-105">Next Level</button>
             </div>
-            <div id="congratulations-1" class="congratulations text-center">Congratulations! You completed Level 1.</div>
-            <button id="next-button-1" class="hidden px-6 py-3 bg-blue-600 text-white text-lg rounded-lg shadow-lg">Next Level</button>
-        </div>
-    
-    <div id="level-2" class="level hidden">
+            <div id="level-2" class="level hidden">
                 <h2 class="text-2xl lg:text-4xl mb-4">Cryptic Crossword</h2>
-                <div class="crossword">
+                <div class="crossword flex flex-col items-center">
                     <h2 class="text-2xl lg:text-4xl mb-4">Clue: Bird seen in the museum (3)</h2>
-                    <br>
-                    <div class="crossword-grid">
+                    <div class="crossword-grid grid grid-cols-3 gap-4 mb-6">
                         <input type="text" class="crossword-cell" maxlength="1">
                         <input type="text" class="crossword-cell" maxlength="1">
                         <input type="text" class="crossword-cell" maxlength="1">
                     </div>
-                    <br>
-                    <button id="hint-button-wordplay" class="hint-button">Reveal Wordplay Hint</button>
-                    <p id="hint-wordplay" class="hint">Wordplay: some of the letters of ("seen in") THEMUSEUM</p>
-                    <button id="hint-button-definition" class="hint-button">Reveal Definition Hint</button>
-                    <p id="hint-definition" class="hint">Definition: bird</p>
-                    <br>
+                    <button id="hint-button-wordplay" class="hint-button px-4 py-2 bg-indigo-600 text-white rounded-lg shadow-lg transition-transform transform hover:scale-105">Reveal Wordplay Hint</button>
+                    <p id="hint-wordplay" class="hint mt-4 text-yellow-400">Wordplay: some of the letters of ("seen in") THEMUSEUM</p>
+                    <button id="hint-button-definition" class="hint-button px-4 py-2 bg-indigo-600 text-white rounded-lg shadow-lg transition-transform transform hover:scale-105 mt-4">Reveal Definition Hint</button>
+                    <p id="hint-definition" class="hint mt-4 text-yellow-400">Definition: bird</p>
                     <div id="congratulations-2" class="congratulations text-center">Congratulations! You completed Level 2.</div>
-                    <button id="next-button-2" class="hidden px-6 py-3 bg-blue-600 text-white text-lg rounded-lg shadow-lg">Next Level</button>
+                    <button id="next-button-2" class="hidden px-6 py-3 bg-blue-600 text-white text-lg rounded-lg shadow-lg transition-transform transform hover:scale-105 mt-4">Next Level</button>
                 </div>
             </div>
             <div id="level-3" class="level hidden">
-                <h2 class="text-2xl lg:text-4xl mb-4">Riddle Quest</h2>
-                <div class="riddle-quest flex flex-col items-center">
-                    <p id="riddle" class="mb-6">What has keys but can't open locks?</p>
-                    <input type="text" id="riddle-answer" class="px-4 py-2 mb-4 bg-gray-700 text-white rounded-lg shadow-lg">
-                    <button id="submit-riddle-answer" class="px-4 py-2 bg-indigo-600 text-white rounded-lg shadow-lg transition-transform transform hover:scale-105">Submit Answer</button>
-                    <div id="riddle-feedback" class="temp-message mt-4"></div>
-                    <div id="congratulations-3" class="congratulations text-center">Congratulations! You completed Level 3.</div>
-                    <button id="next-button-3" class="hidden px-6 py-3 bg-blue-600 text-white text-lg rounded-lg shadow-lg transition-transform transform hover:scale-105 mt-4">Next Level</button>
+                <h2 class="text-2xl lg:text-4xl mb-4">GeoGuessr</h2>
+                <div class="flex flex-col lg:flex-row gap-4 mb-6">
+                    <div id="street-view" class="lg:w-1/2"></div>
+                    <div id="map" class="lg:w-1/2"></div>
                 </div>
+                <input type="text" id="street-view-guess" class="px-4 py-2 mb-4 bg-gray-700 text-white rounded-lg shadow-lg hidden" placeholder="Enter your guess...">
+                <button id="submit-street-view-guess" class="px-4 py-2 bg-indigo-600 text-white rounded-lg shadow-lg transition-transform transform hover:scale-105">Submit Guess</button>
+                <div id="street-view-feedback" class="temp-message mt-4"></div>
+                <div id="congratulations-3" class="congratulations text-center">Congratulations! You completed Level 3.</div>
+                <button id="next-button-3" class="hidden px-6 py-3 bg-blue-600 text-white text-lg rounded-lg shadow-lg transition-transform transform hover:scale-105 mt-4">Finish</button>
+            </div>
+            <div id="congratulations-page" class="level hidden">
+                <h2 class="text-2xl lg:text-4xl mb-4">Congratulations!</h2>
+                <p class="text-lg lg:text-2xl mb-6">You’ve completed the Game! Hope you enjoyed the adventure. Happy Birthday!</p>
+                <img src="images/happy_birthday.gif" alt="Happy Birthday" class="w-1/2 h-auto mb-6 rounded-lg shadow-lg">
+                
             </div>
         </div>
     </div>
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
 </body>
 </html>
