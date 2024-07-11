@@ -39,7 +39,7 @@ p {
     padding: 15px 30px;
     font-size: 1.5em;
     cursor: pointer;
-    background-color: #5f4bb6;
+    background-color: #ffd700;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -48,7 +48,7 @@ p {
 }
 
 #start-button:hover {
-    background-color: #4a3b92;
+    background-color: #ff9900;
     transform: scale(1.05);
 }
 

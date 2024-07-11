@@ -5,12 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dan’s Mystical Global Journey - Connections Game</title>
     <link href="https://unpkg.com/tailwindcss@^2.0/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Merriweather', serif;
-            background-color: #1b1b1b;
+            font-family: 'Orbitron', serif;
+            background: url('images/background.gif') no-repeat center center fixed;
+            background-size: cover;
             color: #f5f5f5;
+        }
+        .landing-page {
+            position: relative;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(45deg, #ff7e5f, #feb47b);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+        }
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
         .grid {
             display: grid;
@@ -38,7 +57,7 @@
         /* If using plain CSS, add these styles */
 .bg-blue-500 { background-color: #3b82f6; }
 .bg-green-500 { background-color: #10b981; }
-.bg-red-500 { background-color: #ef4444; }
+.bg-red-500 { background-color: #c144ef; }
 .bg-yellow-500 { background-color: #f59e0b; }
 .crossword {
             display: flex;
@@ -84,10 +103,9 @@
 </head>
 <body>
     <div id="game-container" class="max-w-4xl mx-auto p-8">
-        <div id="landing-page" class="flex flex-col justify-center items-center h-screen text-center bg-cover bg-center" style="background-image: url('background.jpg');">
+        <div id="landing-page" class="flex flex-col justify-center items-center h-screen text-center bg-cover bg-center">
             <h1 class="text-4xl lg:text-6xl text-yellow-400 drop-shadow-lg mb-4">Dan’s Birthday Quiz</h1>
-            <img src="cake.gif" alt="Mystical Journey" class="w-1/2 h-auto mb-6 rounded-lg shadow-lg">
-            <p class="text-lg lg:text-2xl mb-6">Complete 5 Levels of puzzles, games and quizzes!</p>
+            <img src="cake.gif" width="300">
             <button id="start-button" class="px-8 py-4 bg-purple-700 text-white text-xl rounded-lg shadow-lg">Begin The Game</button>
         </div>
         <div id="level-container" class="hidden p-8 bg-gray-800 rounded-lg shadow-lg">
