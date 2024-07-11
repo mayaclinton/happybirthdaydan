@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dan’s Mystical Global Journey - Connections Game</title>
+    <title>Happy Birthday</title>
     <link href="https://unpkg.com/tailwindcss@^2.0/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
     <style>
@@ -26,11 +26,7 @@
             background-size: 400% 400%;
             animation: gradientAnimation 15s ease infinite;
         }
-        @keyframes gradientAnimation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+        
         .grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -51,18 +47,21 @@
             background-color: #4a3b92;
         }
         .grouped {
-            background-color: #5f4bb6;
+            background-color: #8d3d9d;
             cursor: not-allowed;
         }
         /* If using plain CSS, add these styles */
-.bg-blue-500 { background-color: #3b82f6; }
-.bg-green-500 { background-color: #10b981; }
-.bg-red-500 { background-color: #c144ef; }
-.bg-yellow-500 { background-color: #f59e0b; }
-.crossword {
+        .bg-blue-500 { background-color: #3b82f6; }
+        .bg-green-500 { background-color: #10b981; }
+        .bg-red-500 { background-color: #c144ef; }
+        .bg-yellow-500 { background-color: #f59e0b; }
+
+        .crossword {
             display: flex;
             flex-direction: column;
             align-items: center;
+            border-radius: 5px;
+            background-color: #2a2a2a;
         }
         .crossword-grid {
             display: grid;
@@ -76,7 +75,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #2a2a2a;
+            background-color: #665d8e;
             color: #f5f5f5;
             font-size: 24px;
             border-radius: 5px;
@@ -99,6 +98,18 @@
             display: none;
             color: #ffd700;
         }
+        .congratulations {
+            display: none;
+            margin-top: 20px;
+            font-size: 1.5em;
+            color: #ffd700;
+        }
+        .temp-message {
+            display: none;
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #ffd700;
+        }
     </style>
 </head>
 <body>
@@ -114,23 +125,39 @@
             <div id="grid" class="grid mb-6">
                 <!-- Grid items will be dynamically inserted here -->
             </div>
+            <div id="congratulations-1" class="congratulations text-center">Congratulations! You completed Level 1.</div>
             <button id="next-button-1" class="hidden px-6 py-3 bg-blue-600 text-white text-lg rounded-lg shadow-lg">Next Level</button>
         </div>
-    </div>
+    
     <div id="level-2" class="level hidden">
                 <h2 class="text-2xl lg:text-4xl mb-4">Cryptic Crossword</h2>
                 <div class="crossword">
-                    <p>Clue: Bird seen in the museum (3)</p>
+                    <h2 class="text-2xl lg:text-4xl mb-4">Clue: Bird seen in the museum (3)</h2>
+                    <br>
                     <div class="crossword-grid">
                         <input type="text" class="crossword-cell" maxlength="1">
                         <input type="text" class="crossword-cell" maxlength="1">
                         <input type="text" class="crossword-cell" maxlength="1">
                     </div>
+                    <br>
                     <button id="hint-button-wordplay" class="hint-button">Reveal Wordplay Hint</button>
                     <p id="hint-wordplay" class="hint">Wordplay: some of the letters of ("seen in") THEMUSEUM</p>
                     <button id="hint-button-definition" class="hint-button">Reveal Definition Hint</button>
                     <p id="hint-definition" class="hint">Definition: bird</p>
+                    <br>
+                    <div id="congratulations-2" class="congratulations text-center">Congratulations! You completed Level 2.</div>
                     <button id="next-button-2" class="hidden px-6 py-3 bg-blue-600 text-white text-lg rounded-lg shadow-lg">Next Level</button>
+                </div>
+            </div>
+            <div id="level-3" class="level hidden">
+                <h2 class="text-2xl lg:text-4xl mb-4">Riddle Quest</h2>
+                <div class="riddle-quest flex flex-col items-center">
+                    <p id="riddle" class="mb-6">What has keys but can't open locks?</p>
+                    <input type="text" id="riddle-answer" class="px-4 py-2 mb-4 bg-gray-700 text-white rounded-lg shadow-lg">
+                    <button id="submit-riddle-answer" class="px-4 py-2 bg-indigo-600 text-white rounded-lg shadow-lg transition-transform transform hover:scale-105">Submit Answer</button>
+                    <div id="riddle-feedback" class="temp-message mt-4"></div>
+                    <div id="congratulations-3" class="congratulations text-center">Congratulations! You completed Level 3.</div>
+                    <button id="next-button-3" class="hidden px-6 py-3 bg-blue-600 text-white text-lg rounded-lg shadow-lg transition-transform transform hover:scale-105 mt-4">Next Level</button>
                 </div>
             </div>
         </div>
