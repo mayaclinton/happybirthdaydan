@@ -66,8 +66,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     const countdownTargetDate = new Date('July 24, 2024 00:00:00').getTime();
 
-    function updateCountdown() {
-        const now = new Date().getTime();
+    async function fetchServerTime() {
+        const response = await fetch('http://worldtimeapi.org/api/timezone/Etc/UTC');
+        const data = await response.json();
+        return new Date(data.utc_datetime).getTime();
+    }
+
+    async function updateCountdown() {
+        const now = await fetchServerTime();
         const distance = countdownTargetDate - now;
 
         if (distance <= 0) {
@@ -93,6 +99,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         levelContainer.classList.remove('hidden');
         loadGrid();
     });
+
 
 
     function loadGrid() {
