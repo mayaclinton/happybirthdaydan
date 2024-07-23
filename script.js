@@ -8,10 +8,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const nextButton1 = document.getElementById('next-button-1');
     const nextButton2 = document.getElementById('next-button-2');
     const nextButton3 = document.getElementById('next-button-3');
-    const hintButtonWordplay = document.getElementById('hint-button-wordplay');
-    const hintWordplay = document.getElementById('hint-wordplay');
-    const hintButtonDefinition = document.getElementById('hint-button-definition');
-    const hintDefinition = document.getElementById('hint-definition');
     const crosswordCells = document.querySelectorAll('.crossword-cell');
     const congratulations1 = document.getElementById('congratulations-1');
     const congratulations2 = document.getElementById('congratulations-2');
@@ -21,6 +17,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const submitStreetViewGuess = document.getElementById('submit-street-view-guess');
     const streetViewFeedback = document.getElementById('street-view-feedback');
     const congratulationsPage = document.getElementById('congratulations-page');
+    const levelUpSound = document.getElementById('level-up-sound');
+    const backgroundMusic = document.getElementById('background-music');
+
+    const startLevel1Button = document.getElementById('start-level-1');
+    const startLevel2Button = document.getElementById('start-level-2');
+    const startLevel3Button = document.getElementById('start-level-3');
+
     let panorama;
     let map;
     let marker;
@@ -46,14 +49,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     ];
 
     const streetViewLocations = [
-
-
-
         { lat: 53.715761, lng: -6.347706, location: 'whitty' }
-        // { lat: 40.689247, lng: -74.044502, location: 'New York' },
-        // { lat: -22.951916, lng: -43.2104872, location: 'Rio de Janeiro' },
-        // { lat: 51.5007292, lng: -0.1246254, location: 'London' },
-        // { lat: 35.658581, lng: 139.745433, location: 'Tokyo' }
     ];
 
     let currentStreetViewLocationIndex = 0;
@@ -64,36 +60,73 @@ document.addEventListener('DOMContentLoaded', (event) => {
     let groupedItems = 0;
     let currentGroupIndex = 0;
 
-    const countdownTargetDate = new Date('July 24, 2024 00:00:00').getTime();
+    const backgrounds = [
+        'url(images/background.gif)',
+        'url(images/b1.gif)',
+        'url(images/background2.gif)'
+    ];
 
-    function updateCountdown() {
-        const now = new Date().getTime();
-        const distance = countdownTargetDate - now;
-
-        if (distance <= 0) {
-            startButton.textContent = 'Start the Game';
-            startButton.disabled = false;
-            clearInterval(countdownInterval);
-        } else {
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            startButton.textContent = `Unlocks in ${days}d ${hours}h ${minutes}m ${seconds}s`;
-            startButton.disabled = true;
-        }
-    }
-
-    const countdownInterval = setInterval(updateCountdown, 1000);
-    updateCountdown(); // Initial call to set the countdown immediately
+    const musicTracks = [
+        'sounds/background-music1.mp3',
+        'sounds/background-music2.mp3',
+        'sounds/background-music3.mp3'
+    ];
 
     startButton.addEventListener('click', () => {
         landingPage.style.display = 'none';
         levelContainer.classList.remove('hidden');
+        document.getElementById('character-intro-1').classList.remove('hidden');
+        setBackground(0);
+        setMusic(0);
+        backgroundMusic.play().catch(e => {
+            console.log("Autoplay was prevented, waiting for user interaction");
+        });
+    });
+
+    startLevel1Button.addEventListener('click', () => {
+        document.getElementById('character-intro-1').classList.add('hidden');
+        document.getElementById('level-1').classList.remove('hidden');
         loadGrid();
     });
 
+    nextButton1.addEventListener('click', () => {
+        document.getElementById('level-1').classList.add('hidden');
+        document.getElementById('character-intro-2').classList.remove('hidden');
+        playLevelUpSound();
+        setBackground(1);
+        setMusic(1);
+        backgroundMusic.play().catch(e => {
+            console.log("Autoplay was prevented, waiting for user interaction");
+        });
+    });
+
+    startLevel2Button.addEventListener('click', () => {
+        document.getElementById('character-intro-2').classList.add('hidden');
+        document.getElementById('level-2').classList.remove('hidden');
+    });
+
+    nextButton2.addEventListener('click', () => {
+        document.getElementById('level-2').classList.add('hidden');
+        document.getElementById('character-intro-3').classList.remove('hidden');
+        playLevelUpSound();
+        setBackground(2);
+        setMusic(2);
+        backgroundMusic.play().catch(e => {
+            console.log("Autoplay was prevented, waiting for user interaction");
+        });
+    });
+
+    startLevel3Button.addEventListener('click', () => {
+        document.getElementById('character-intro-3').classList.add('hidden');
+        document.getElementById('level-3').classList.remove('hidden');
+        loadStreetView();
+    });
+
+    nextButton3.addEventListener('click', () => {
+        document.getElementById('level-3').classList.add('hidden');
+        congratulationsPage.classList.remove('hidden');
+        playLevelUpSound();
+    });
 
     function loadGrid() {
         gridContainer.innerHTML = '';
@@ -147,18 +180,35 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
     }
 
-    nextButton1.addEventListener('click', () => {
-        document.getElementById('level-1').classList.add('hidden');
-        document.getElementById('level-2').classList.remove('hidden');
-    });
+    function showTemporaryMessage(message) {
+        const tempMessage = document.createElement('div');
+        tempMessage.className = 'temp-message';
+        tempMessage.textContent = message;
+        levelContainer.appendChild(tempMessage);
+        tempMessage.style.display = 'block';
+        setTimeout(() => {
+            tempMessage.style.display = 'none';
+            tempMessage.remove();
+        }, 2000);
+    }
 
-    hintButtonWordplay.addEventListener('click', () => {
-        hintWordplay.style.display = 'block';
-    });
+    function playLevelUpSound() {
+        levelUpSound.play();
+    }
 
-    hintButtonDefinition.addEventListener('click', () => {
-        hintDefinition.style.display = 'block';
-    });
+    function setBackground(level) {
+        document.body.style.backgroundImage = backgrounds[level];
+    }
+
+    function setMusic(level) {
+        backgroundMusic.src = musicTracks[level];
+        backgroundMusic.load();
+    }
+
+    // Inject the Google Maps script with the API key from config.js
+    const script = document.createElement('script');
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${config.apiKey}&libraries=geometry`;
+    document.head.appendChild(script);
 
     crosswordCells.forEach(cell => {
         cell.addEventListener('input', checkCrossword);
@@ -171,12 +221,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
             nextButton2.classList.remove('hidden');
         }
     }
-
-    nextButton2.addEventListener('click', () => {
-        document.getElementById('level-2').classList.add('hidden');
-        document.getElementById('level-3').classList.remove('hidden');
-        loadStreetView();
-    });
 
     function loadStreetView() {
         currentStreetViewLocationIndex = Math.floor(Math.random() * streetViewLocations.length);
@@ -242,26 +286,4 @@ document.addEventListener('DOMContentLoaded', (event) => {
             nextButton3.classList.remove('hidden');
         }
     });
-
-    nextButton3.addEventListener('click', () => {
-        document.getElementById('level-3').classList.add('hidden');
-        congratulationsPage.classList.remove('hidden');
-    });
-
-    function showTemporaryMessage(message) {
-        const tempMessage = document.createElement('div');
-        tempMessage.className = 'temp-message';
-        tempMessage.textContent = message;
-        levelContainer.appendChild(tempMessage);
-        tempMessage.style.display = 'block';
-        setTimeout(() => {
-            tempMessage.style.display = 'none';
-            tempMessage.remove();
-        }, 2000);
-    }
-
-    // Inject the Google Maps script with the API key from config.js
-    const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${config.apiKey}&libraries=geometry`;
-    document.head.appendChild(script);
 });

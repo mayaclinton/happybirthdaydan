@@ -26,7 +26,6 @@
             background-size: 400% 400%;
             animation: gradientAnimation 15s ease infinite;
         }
-        
         .grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -50,7 +49,6 @@
             background-color: #8d3d9d;
             cursor: not-allowed;
         }
-        /* If using plain CSS, add these styles */
         .bg-blue-500 { background-color: #3b82f6; }
         .bg-green-500 { background-color: #10b981; }
         .bg-red-500 { background-color: #c144ef; }
@@ -124,41 +122,51 @@
             text-align: center;
         }
         #street-view {
-        width: 100%;
-        height: 400px;
-    }
-    /* Hide the Street View location info */
-    .gm-style .gm-iv-address {
-        display: none !important;
-    }
-    .gm-style .gm-iv-address-background {
-        display: none !important;
-    }
-    #countdown {
+            width: 100%;
+            height: 400px;
+        }
+        .gm-style .gm-iv-address {
+            display: none !important;
+        }
+        .gm-style .gm-iv-address-background {
+            display: none !important;
+        }
+        #countdown {
             font-size: 3rem;
             text-align: center;
             margin-top: 20%;
         }
+        .hidden { display: none; }
     </style>
 </head>
 <body>
-    
     <div id="game-container" class="max-w-4xl mx-auto p-8">
         <div id="landing-page" class="landing-page flex flex-col justify-center items-center h-screen text-center">
             <h1 class="text-4xl lg:text-6xl text-yellow-400 drop-shadow-lg mb-4">Dan’s Birthday Quiz</h1>
-        
             <img src="cake.gif" width="300">
             <button id="start-button" class="px-8 py-4 bg-purple-700 text-white text-xl rounded-lg shadow-lg transition-transform transform hover:scale-105">Start The Game</button>
         </div>
         <div id="level-container" class="hidden p-8 bg-gray-800 rounded-lg shadow-lg">
-            <div id="level-1" class="level">
+            <div id="character-intro-1" class="hidden">
+                <h2 class="text-2xl lg:text-4xl mb-4">Level 1: The Swordsman</h2>
+                <p class="mb-4">The Swordsman needs your help to complete the connections game. Can you assist him by finding all the groups?</p>
+                <img src="images/ch1.gif">
+                <button id="start-level-1" class="px-6 py-3 bg-green-600 text-white text-lg rounded-lg shadow-lg transition-transform transform hover:scale-105">Start Level 1</button>
+            </div>
+            <div id="level-1" class="level hidden">
                 <h2 class="text-2xl lg:text-4xl mb-4">Connections Game</h2>
-                <div id="grid" class="grid grid-cols-4 gap-4 mb-6">
-                    <!-- Grid items will be dynamically inserted here -->
-                </div>
+                <div id="grid" class="grid grid-cols-4 gap-4 mb-6"></div>
                 <div id="congratulations-1" class="congratulations text-center">Congratulations! You completed Level 1.</div>
                 <button id="next-button-1" class="hidden px-6 py-3 bg-blue-600 text-white text-lg rounded-lg shadow-lg transition-transform transform hover:scale-105">Next Level</button>
             </div>
+
+            <div id="character-intro-2" class="hidden flex flex-col items-center">
+                <h2 class="text-2xl lg:text-4xl mb-4">Level 2: The Cat</h2>
+                <p class="mb-4 text-center">The Cat needs to solve a crossword puzzle to unlock a secret. Can you help him find the right words?</p>
+                <img src="images/c2.gif" class="mb-4">
+                <button id="start-level-2" class="px-6 py-3 bg-green-600 text-white text-lg rounded-lg shadow-lg transition-transform transform hover:scale-105">Start Level 2</button>
+            </div>
+            
             <div id="level-2" class="level hidden">
                 <h2 class="text-2xl lg:text-4xl mb-4">Cryptic Crossword</h2>
                 <div class="crossword flex flex-col items-center">
@@ -176,6 +184,13 @@
                     <button id="next-button-2" class="hidden px-6 py-3 bg-blue-600 text-white text-lg rounded-lg shadow-lg transition-transform transform hover:scale-105 mt-4">Next Level</button>
                 </div>
             </div>
+
+            <div id="character-intro-3" class="hidden flex flex-col items-center">
+                <h2 class="text-2xl lg:text-4xl mb-4">Level 3: The Witch</h2>
+                <p class="mb-4 text-center">The Witch  is exploring new places. Can you help her by identifying the location in Street View?</p>
+                <img src="images/c3.gif" class="mb-4">
+                <button id="start-level-3" class="px-6 py-3 bg-green-600 text-white text-lg rounded-lg shadow-lg transition-transform transform hover:scale-105">Start Level 2</button>
+            </div>
             <div id="level-3" class="level hidden">
                 <h2 class="text-2xl lg:text-4xl mb-4">GeoGuessr</h2>
                 <div class="flex flex-col lg:flex-row gap-4 mb-6">
@@ -188,14 +203,18 @@
                 <div id="congratulations-3" class="congratulations text-center">Congratulations! You completed Level 3.</div>
                 <button id="next-button-3" class="hidden px-6 py-3 bg-blue-600 text-white text-lg rounded-lg shadow-lg transition-transform transform hover:scale-105 mt-4">Finish</button>
             </div>
+
             <div id="congratulations-page" class="level hidden">
                 <h2 class="text-2xl lg:text-4xl mb-4">Congratulations!</h2>
                 <p class="text-lg lg:text-2xl mb-6">You’ve completed the Game! Hope you enjoyed the adventure. Happy Birthday!</p>
                 <img src="images/happy_birthday.gif" alt="Happy Birthday" class="w-1/2 h-auto mb-6 rounded-lg shadow-lg">
-                
             </div>
         </div>
     </div>
+
+    <audio id="level-up-sound" src="sounds/level-up.mp3"></audio>
+    <audio id="background-music" src="sounds/background-music.mp3" loop></audio>
+
     <script type="module" src="script.js"></script>
 </body>
 </html>
