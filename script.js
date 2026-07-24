@@ -308,7 +308,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         streetViewFeedback.textContent = `Your guess was ${distance.toFixed(2)} km away. Your score: ${score.toFixed(2)}`;
         streetViewFeedback.style.display = 'block';
 
-        if (score >= 90) { // Arbitrary threshold for "success"
+        if (distance <= 800) {
             congratulations3.style.display = 'block';
             nextButton3.classList.remove('hidden');
         }
