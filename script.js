@@ -30,22 +30,22 @@ document.addEventListener('DOMContentLoaded', (event) => {
     let currentStreetViewLocation;
 
     const items = [
-        { name: 'Tokyo', group: 1 },
-        { name: 'Osaka', group: 1 },
-        { name: 'Kyoto', group: 1 },
-        { name: 'Hiroshima', group: 1 },
-        { name: 'Lima', group: 2 },
-        { name: 'Quito', group: 2 },
-        { name: 'Bogotá', group: 2 },
-        { name: 'Caracas', group: 2 },
-        { name: 'Lion', group: 3 },
-        { name: 'Elephant', group: 3 },
-        { name: 'Giraffe', group: 3 },
-        { name: 'Zebra', group: 3 },
-        { name: 'Brie', group: 4 },
-        { name: 'Gouda', group: 4 },
-        { name: 'Cheddar', group: 4 },
-        { name: 'Camembert', group: 4 }
+        { name: 'Dublin', group: 1 },
+        { name: 'Cork', group: 1 },
+        { name: 'Galway', group: 1 },
+        { name: 'Limerick', group: 1 },
+        { name: 'Velo', group: 2 },
+        { name: 'Marlboro', group: 2 },
+        { name: 'Lost Mary', group: 2 },
+        { name: 'Juul', group: 2 },
+        { name: 'Haaland', group: 3 },
+        { name: 'IKEA', group: 3 },
+        { name: 'ABBA', group: 3 },
+        { name: 'Nordic Spirit', group: 3 },
+        { name: "Dan & Deanna's", group: 4 },
+        { name: 'The Studio', group: 4 },
+        { name: "Peggy's", group: 4 },
+        { name: 'Coffee Box', group: 4 }
     ];
 
     const streetViewLocations = [
@@ -210,8 +210,28 @@ document.addEventListener('DOMContentLoaded', (event) => {
     script.src = `https://maps.googleapis.com/maps/api/js?key=${config.apiKey}&libraries=geometry`;
     document.head.appendChild(script);
 
-    crosswordCells.forEach(cell => {
-        cell.addEventListener('input', checkCrossword);
+    crosswordCells.forEach((cell, index) => {
+        cell.addEventListener('input', () => {
+            if (cell.value.length === 1 && index < crosswordCells.length - 1) {
+                crosswordCells[index + 1].focus();
+            }
+            checkCrossword();
+        });
+        cell.addEventListener('keydown', (e) => {
+            if (e.key === 'Backspace' && cell.value === '' && index > 0) {
+                crosswordCells[index - 1].focus();
+            }
+        });
+    });
+
+    document.getElementById('hint-button-wordplay').addEventListener('click', () => {
+        const hint = document.getElementById('hint-wordplay');
+        hint.style.display = hint.style.display === 'block' ? 'none' : 'block';
+    });
+
+    document.getElementById('hint-button-definition').addEventListener('click', () => {
+        const hint = document.getElementById('hint-definition');
+        hint.style.display = hint.style.display === 'block' ? 'none' : 'block';
     });
 
     function checkCrossword() {
