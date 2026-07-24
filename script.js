@@ -49,12 +49,18 @@ document.addEventListener('DOMContentLoaded', (event) => {
     ];
 
     const streetViewLocations = [
-        { lat: 41.8902, lng: 12.4922, location: 'rome' }
+        { lat: 78.2232, lng: 15.6267, location: 'svalbard' }
     ];
 
     let currentStreetViewLocationIndex = 0;
 
     const groupColors = ['bg-blue-500', 'bg-green-500', 'bg-red-500', 'bg-yellow-500'];
+    const groupLabels = {
+        1: 'Irish Cities',
+        2: 'Nicotine Brands',
+        3: 'Swedish Things',
+        4: 'Hangout Spots'
+    };
 
     let selectedItems = [];
     let groupedItems = 0;
@@ -130,6 +136,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     function loadGrid() {
         gridContainer.innerHTML = '';
+        document.getElementById('solved-groups').innerHTML = '';
         items.sort(() => 0.5 - Math.random());
         items.forEach(item => {
             const div = document.createElement('div');
@@ -157,18 +164,18 @@ document.addEventListener('DOMContentLoaded', (event) => {
             const allSameGroup = selectedItems.every(i => i.dataset.group === itemGroup);
 
             if (allSameGroup) {
-                selectedItems.forEach(selectedItem => {
-                    selectedItem.classList.add('grouped');
-                    selectedItem.classList.add(groupColors[currentGroupIndex % groupColors.length]);
-                    selectedItem.classList.remove('selected');
-                });
+                const colorClass = groupColors[currentGroupIndex % groupColors.length];
+                const bar = document.createElement('div');
+                bar.className = `solved-group ${colorClass}`;
+                bar.textContent = groupLabels[parseInt(itemGroup)];
+                document.getElementById('solved-groups').appendChild(bar);
+
+                selectedItems.forEach(selectedItem => selectedItem.remove());
                 groupedItems += 4;
                 currentGroupIndex++;
                 if (groupedItems === items.length) {
                     congratulations1.style.display = 'block';
                     nextButton1.classList.remove('hidden');
-                } else {
-                    showTemporaryMessage('Correct! You found a group.');
                 }
             } else {
                 showTemporaryMessage('Incorrect grouping. Try again.');
