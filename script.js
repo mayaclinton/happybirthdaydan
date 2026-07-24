@@ -61,9 +61,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
     let currentGroupIndex = 0;
 
     const backgrounds = [
-        'url(images/background.gif)',
-        'url(images/b1.gif)',
-        'url(images/background2.gif)'
+        'url(assets/background.gif)',
+        'url(assets/b1.gif)',
+        'url(assets/background2.gif)'
     ];
 
     const musicTracks = [
