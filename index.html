@@ -6,14 +6,19 @@
     <title>Happy Birthday Dan 2026</title>
     <link rel="icon" type="image/x-icon" href="images/favicon.png">
     <link href="https://unpkg.com/tailwindcss@^2.0/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Orbitron', serif;
+            font-family: 'Lora', serif;
             background: url('images/background.gif') no-repeat center center fixed;
             background-size: cover;
-            color: #f5f5f5;
+            color: #f0e6d3;
         }
+
+        h1, h2 { font-family: 'Playfair Display', serif; }
+        h2 { color: #d4a017; }
+        button { font-family: 'Lora', serif; letter-spacing: 0.05em; }
+        p { color: #d4c4a8; }
 
         @keyframes gradientAnimation {
             0% { background-position: 0% 50%; }
@@ -21,9 +26,9 @@
             100% { background-position: 0% 50%; }
         }
 
-        @keyframes neonPulse {
-            0%, 100% { text-shadow: 0 0 10px #ffd700, 0 0 25px #ffd700, 0 0 50px #ff9900; }
-            50% { text-shadow: 0 0 5px #ffd700, 0 0 12px #ffd700; }
+        @keyframes warmGlow {
+            0%, 100% { text-shadow: 0 2px 8px rgba(212,160,23,0.7), 0 0 30px rgba(212,160,23,0.2); }
+            50% { text-shadow: 0 2px 4px rgba(212,160,23,0.3); }
         }
 
         .landing-page {
@@ -35,13 +40,41 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: linear-gradient(-45deg, #0d0d2b, #1a0533, #0d1f4d, #1a0022);
+            background: linear-gradient(-45deg, #0a150a, #1a0e00, #0d1a08, #150f00);
             background-size: 400% 400%;
-            animation: gradientAnimation 15s ease infinite;
+            animation: gradientAnimation 18s ease infinite;
         }
 
         .landing-title {
-            animation: neonPulse 3s ease-in-out infinite;
+            color: #d4a017;
+            animation: warmGlow 4s ease-in-out infinite;
+            letter-spacing: 0.03em;
+        }
+
+        /* Override Tailwind button colours */
+        .bg-green-600 {
+            background: linear-gradient(135deg, #2d4a1e, #1e3510) !important;
+            border: 1px solid #5a8a5a !important;
+        }
+        .bg-green-600:hover {
+            background: linear-gradient(135deg, #3d5e2a, #2a4a18) !important;
+            box-shadow: 0 0 14px rgba(90,138,90,0.4) !important;
+        }
+        .bg-blue-600 {
+            background: linear-gradient(135deg, #2d4a1e, #1e3510) !important;
+            border: 1px solid #5a8a5a !important;
+        }
+        .bg-blue-600:hover {
+            background: linear-gradient(135deg, #3d5e2a, #2a4a18) !important;
+            box-shadow: 0 0 14px rgba(90,138,90,0.4) !important;
+        }
+        .bg-indigo-600 {
+            background: linear-gradient(135deg, #2d4a1e, #3d2a0a) !important;
+            border: 1px solid #8b6b3d !important;
+        }
+        .bg-indigo-600:hover {
+            background: linear-gradient(135deg, #3d5e2a, #5c3d0a) !important;
+            box-shadow: 0 0 12px rgba(200,136,26,0.3) !important;
         }
 
         .grid {
@@ -52,41 +85,41 @@
 
         .grid-item {
             padding: 20px;
-            background-color: #12123a;
-            border: 1px solid #2a2a6e;
+            background-color: #1a2a14;
+            border: 1px solid #3a5028;
             text-align: center;
             cursor: pointer;
             border-radius: 8px;
             transition: all 0.3s;
             font-size: 0.85rem;
+            font-family: 'Lora', serif;
+            color: #f0e6d3;
         }
 
         .grid-item:hover {
-            background-color: #1e1e5a;
-            border-color: #00d4ff;
-            box-shadow: 0 0 12px rgba(0, 212, 255, 0.3);
+            background-color: #233318;
+            border-color: #c8881a;
+            box-shadow: 0 0 12px rgba(200,136,26,0.3);
             transform: translateY(-2px);
         }
 
         .selected {
-            background-color: #5c007a !important;
-            border-color: #e040fb !important;
-            box-shadow: 0 0 15px rgba(224, 64, 251, 0.5) !important;
+            background-color: #5c3a0a !important;
+            border-color: #d4a017 !important;
+            box-shadow: 0 0 15px rgba(212,160,23,0.4) !important;
         }
 
-        .grouped {
-            cursor: not-allowed;
-            opacity: 0.9;
-        }
+        .grouped { cursor: not-allowed; opacity: 0.9; }
 
-        .bg-blue-500 { background-color: #0277bd !important; border-color: #29b6f6 !important; }
-        .bg-green-500 { background-color: #00695c !important; border-color: #26a69a !important; }
-        .bg-red-500 { background-color: #7b1fa2 !important; border-color: #ce93d8 !important; }
-        .bg-yellow-500 { background-color: #e65100 !important; border-color: #ffca28 !important; color: #1a1a1a !important; }
+        /* Earthy group colours: moss / bark / terracotta / harvest gold */
+        .bg-blue-500  { background-color: #2d5a3d !important; border-color: #5a8a5a !important; color: #f0e6d3 !important; }
+        .bg-green-500 { background-color: #4a3520 !important; border-color: #8b6b3d !important; color: #f0e6d3 !important; }
+        .bg-red-500   { background-color: #6b2d1a !important; border-color: #c4622d !important; color: #f0e6d3 !important; }
+        .bg-yellow-500{ background-color: #7a5c0a !important; border-color: #d4a017 !important; color: #f0e6d3 !important; }
 
         #level-container {
-            background-color: #0a0a1e !important;
-            border: 1px solid #1e1e5a;
+            background-color: #0d150a !important;
+            border: 1px solid #2a3820;
         }
 
         .crossword {
@@ -94,9 +127,9 @@
             flex-direction: column;
             align-items: center;
             border-radius: 10px;
-            background-color: #12123a;
+            background-color: #1a2a14;
             padding: 20px;
-            border: 1px solid #2a2a6e;
+            border: 1px solid #3a5028;
         }
 
         .crossword-grid {
@@ -109,60 +142,66 @@
         .crossword-cell {
             width: 52px;
             height: 52px;
-            background-color: #1a1a4e;
-            border: 2px solid #00d4ff;
-            color: #f5f5f5;
+            background-color: #2a1f10;
+            border: 2px solid #8b6b3d;
+            color: #f0e6d3;
             font-size: 22px;
-            border-radius: 8px;
+            border-radius: 6px;
             text-transform: uppercase;
             text-align: center;
             outline: none;
-            font-family: 'Orbitron', serif;
-            caret-color: #00d4ff;
+            font-family: 'Playfair Display', serif;
+            caret-color: #d4a017;
         }
 
         .crossword-cell:focus {
-            border-color: #e040fb;
-            box-shadow: 0 0 12px rgba(224, 64, 251, 0.5);
+            border-color: #d4a017;
+            box-shadow: 0 0 10px rgba(212,160,23,0.4);
+            background-color: #332510;
         }
 
         .hint-button {
             margin-top: 10px;
             padding: 10px 20px;
-            background: linear-gradient(135deg, #2d1b69, #5c007a);
-            color: #fff;
-            border: 1px solid #9c27b0;
-            border-radius: 8px;
+            background: linear-gradient(135deg, #2a1f10, #3a2d18);
+            color: #f0e6d3;
+            border: 1px solid #8b6b3d;
+            border-radius: 6px;
             cursor: pointer;
             transition: all 0.3s;
-            font-family: 'Orbitron', serif;
-            font-size: 0.75rem;
+            font-family: 'Lora', serif;
+            font-size: 0.85rem;
         }
 
         .hint-button:hover {
-            background: linear-gradient(135deg, #5c007a, #9c27b0);
-            box-shadow: 0 0 12px rgba(156, 39, 176, 0.5);
+            background: linear-gradient(135deg, #3a2d18, #5c3d1a);
+            box-shadow: 0 0 10px rgba(200,136,26,0.3);
+            border-color: #d4a017;
         }
 
         .hint {
             margin-top: 10px;
             display: none;
-            color: #ffd700;
+            color: #d4a017;
+            font-style: italic;
         }
 
         .congratulations {
             display: none;
             margin-top: 20px;
             font-size: 1.5em;
-            color: #ffd700;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            color: #d4a017;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            text-shadow: 0 2px 8px rgba(212,160,23,0.3);
         }
 
         .temp-message {
             display: none;
             margin-top: 20px;
-            font-size: 1.2em;
-            color: #00d4ff;
+            font-size: 1.1em;
+            color: #c8881a;
+            font-style: italic;
         }
 
         #street-view {
@@ -170,7 +209,7 @@
             height: 400px;
             border-radius: 10px;
             overflow: hidden;
-            border: 2px solid #2a2a6e;
+            border: 2px solid #3a5028;
         }
 
         #map {
@@ -178,15 +217,11 @@
             height: 400px;
             border-radius: 10px;
             overflow: hidden;
-            border: 2px solid #2a2a6e;
+            border: 2px solid #3a5028;
         }
 
-        .gm-style .gm-iv-address {
-            display: none !important;
-        }
-        .gm-style .gm-iv-address-background {
-            display: none !important;
-        }
+        .gm-style .gm-iv-address { display: none !important; }
+        .gm-style .gm-iv-address-background { display: none !important; }
 
         .hidden { display: none; }
     </style>
@@ -194,10 +229,10 @@
 <body>
     <div id="game-container" class="max-w-4xl mx-auto p-8">
         <div id="landing-page" class="landing-page flex flex-col justify-center items-center h-screen text-center">
-            <h1 class="landing-title text-4xl lg:text-6xl text-yellow-400 drop-shadow-lg mb-2">Happy Birthday Dan!</h1>
-            <p class="text-lg mb-6" style="color:#00d4ff; letter-spacing: 0.2em;">2026 EDITION</p>
-            <img src="cake.gif" width="250" class="mb-6 rounded-lg">
-            <button id="start-button" class="px-8 py-4 text-white text-xl rounded-lg shadow-lg transition-transform transform hover:scale-105" style="background: linear-gradient(135deg, #5c007a, #0277bd); border: 1px solid #00d4ff; box-shadow: 0 0 20px rgba(0,212,255,0.3);">Start The Game</button>
+            <h1 class="landing-title text-4xl lg:text-6xl mb-2">Happy Birthday Dan!</h1>
+            <p class="text-lg mb-6" style="color:#c8a96e; letter-spacing: 0.2em; font-style: italic; font-family: 'Lora', serif;">a little adventure for you · 2026</p>
+            <img src="cake.gif" width="220" class="mb-6 rounded-lg">
+            <button id="start-button" class="px-8 py-4 text-white text-xl rounded-lg shadow-lg transition-transform transform hover:scale-105" style="background: linear-gradient(135deg, #2d4a1e, #3d2a0a); border: 1px solid #8b6b3d; box-shadow: 0 0 15px rgba(200,136,26,0.25); font-family: 'Lora', serif;">Begin the Quest</button>
         </div>
         <div id="level-container" class="hidden p-8 bg-gray-800 rounded-lg shadow-lg">
             <div id="character-intro-1" class="hidden">
