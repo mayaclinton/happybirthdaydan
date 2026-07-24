@@ -30,26 +30,26 @@ document.addEventListener('DOMContentLoaded', (event) => {
     let currentStreetViewLocation;
 
     const items = [
-        { name: 'Canada', group: 1 },
-        { name: 'USA', group: 1 },
-        { name: 'Mexico', group: 1 },
-        { name: 'Guatemala', group: 1 },
-        { name: 'Brazil', group: 2 },
-        { name: 'Argentina', group: 2 },
-        { name: 'Chile', group: 2 },
-        { name: 'Peru', group: 2 },
-        { name: 'London', group: 3 },
-        { name: 'Paris', group: 3 },
-        { name: 'Berlin', group: 3 },
-        { name: 'Rome', group: 3 },
-        { name: 'Eiffel Tower', group: 4 },
-        { name: 'Statue of Liberty', group: 4 },
-        { name: 'Big Ben', group: 4 },
-        { name: 'Colosseum', group: 4 }
+        { name: 'Tokyo', group: 1 },
+        { name: 'Osaka', group: 1 },
+        { name: 'Kyoto', group: 1 },
+        { name: 'Hiroshima', group: 1 },
+        { name: 'Lima', group: 2 },
+        { name: 'Quito', group: 2 },
+        { name: 'Bogotá', group: 2 },
+        { name: 'Caracas', group: 2 },
+        { name: 'Lion', group: 3 },
+        { name: 'Elephant', group: 3 },
+        { name: 'Giraffe', group: 3 },
+        { name: 'Zebra', group: 3 },
+        { name: 'Brie', group: 4 },
+        { name: 'Gouda', group: 4 },
+        { name: 'Cheddar', group: 4 },
+        { name: 'Camembert', group: 4 }
     ];
 
     const streetViewLocations = [
-        { lat: 53.715761, lng: -6.347706, location: 'whitty' }
+        { lat: 41.8902, lng: 12.4922, location: 'rome' }
     ];
 
     let currentStreetViewLocationIndex = 0;
@@ -216,7 +216,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     function checkCrossword() {
         const answer = Array.from(crosswordCells).map(cell => cell.value.toUpperCase()).join('');
-        if (answer === 'EMU') {
+        if (answer === 'ORANGE') {
             congratulations2.style.display = 'block';
             nextButton2.classList.remove('hidden');
         }
